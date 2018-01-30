@@ -131,7 +131,7 @@ namespace ItemSystem
             }
             virtual const unsigned short& getSpellDamage() const {
                 return spelldam;
-        }
+            }
             virtual const unsigned short& getCrit() const {
                 return crit;
             }
@@ -187,41 +187,113 @@ namespace ItemSystem
                 Weapon(name, desc, next_id++, damage, crit, spell damage, buy, sell, accuracy,)
                 }*/
                 //{
-                    //"Test Weapon",
-                    //Weapon("Test Weapon", "For testing, idiot.", next_id++, 20, 10, 5)
+                //"Test Weapon",
+                //Weapon("Test Weapon", "For testing, idiot.", next_id++, 20, 10, 5)
                 //}
                 {
-                  "Stick",
-                    Weapon( "Stick", "Useless, cannot gain any profficiency bonuses.", next_id++, 1, 0, 1, 0, 0, 100),
+                    "Stick",
+                    Weapon("Stick", "Useless, cannot gain any proficiency bonuses.", next_id++, 1, 0, 1, 100,  0, 0)
                 },
                 {
-                  "Modal Soul",
-                  Weapon("Modal Soul", "Wait!", next_id++, 9999, 100, 9999, 9999, 9999, 100)
+                    "Modal Soul",
+                    Weapon("Modal Soul", "Wait!", next_id++, 9999, 100, 9999, 100, 9999, 9999)
                 },
                 {
                     "Wooden Bow",
-                    Weapon("Wooden Bow", "A starter weapon for most hunters in training.", next_id++, 3, 5, 0, 10, 7, 50)
+                    Weapon("Wooden Bow", "A starter weapon for most hunters in training.", next_id++, 3, 5, 0, 50, 10, 7)
                 },
                 {
                     "Reinforced Bow",
-                    Weapon("Reinforced Bow", "A more unique and composed wooden bow.", next_id++, 7, 10, 0, 30, 20, 60)
+                    Weapon("Reinforced Bow", "A more unique and composed wooden bow.", next_id++, 7, 10, 0, 60, 30, 20)
                 },
                 {
                     "Iron Bow",
-                    Weapon("Iron Bow", "Forged in some unholy Audi'je's home, this bow is made from \nregurgitated iron.", next_id++, 15, 15, 0, 60, 50, 70)
+                    Weapon("Iron Bow", "Forged in some unholy Audi'je's home, this bow is made from \nregurgitated iron.", next_id++, 15, 15, 0, 70, 60, 50)
                 },
                 {
                     "Tactical Compound Bow",
-                    Weapon("Tactical Compound Bow", "A bow with a 16x optical scope, strap, and a better string.", next_id++, 35, 20, 0, 100, 80, 100)
+                    Weapon("Tactical Compound Bow", "A bow with a 16x optical scope, strap, and a better string.", next_id++, 35, 20, 0, 100, 100, 80)
                 },
                 {
                     "Meteor Bow",
-                    Weapon("Meteor Bow", "Forged from a passing meteor, nicknamed MB-132. Incredibly Rare", next_id++, 50, 25, 0, 250, 200, 75)
+                    Weapon("Meteor Bow", "Forged from a passing meteor, nicknamed MB-132. Incredibly Rare", next_id++, 50, 25, 0, 75, 250, 200)
                 },
                 {
                     "Star Bow",
-                    Weapon("Star Bow", "This bow has an unkown origin, it's only main feature is the\ndistinct glow the arrows make when fired. The bow seems to possess a special \npower... The power of light.", next_id++, 100, 50, 0, 1000, 750, 75)
+                    Weapon("Star Bow", "This bow has an unkown origin, it's only main feature is the\ndistinct glow the arrows make when fired. The bow seems to possess a special \npower... The power of light.", next_id++, 100, 50, 0, 75, 1000, 750)
                 },
+                {
+                    "Copper Shortsword",
+                    Weapon("Copper Shortsword", "A flimsy blade, made from the cheapest material on the planet.", next_id++, 5, 1, 0, 90, 15, 10)
+                },
+                {
+                    "Iron Blade",
+                    Weapon("Iron Blade", "A less flimsy blade, made from less-cheap materials.", next_id++, 9, 2, 0, 90, 30, 20)
+                },
+                {
+                    "Steel Blade",
+                    Weapon("Steel Blade", "A blade made out of a semi-usable material. Not the best, or \nworst.", next_id++ , 20, 3, 0, 95, 75, 50)
+                },
+                {
+                    "Obsidian Longsword",
+                    Weapon("Obsidian Longsword", "A dangerous weapon, a major step-up from the previous blades.", next_id++, 50, 4, 0, 80, 150, 100)
+                },
+                {
+                    "Core Lightblade",
+                    Weapon("Core Lightblade", "The sword forged inside the planet's core. Has a obsidian blade \nwith magma flowing around it.", next_id++, 100, 4, 0, 95, 500, 400)
+                },
+                {
+                    "The Singularity Blade",
+                    Weapon("The Singularity Blade", "Cuts with astronomical force, created from a god of the past.\nThe blade is complicated and overdone in features, filling a part of the\nblade with a moral of rebirth.", next_id++, 200, 3, 0, 95, 1500, 1250)
+                },
+                {
+                    "Wooden Staff",
+                    Weapon("Wooden Staff", "A wooden stick with some message in an unknown language cut in on \nthe side.", next_id++, 1, 0, 15, 100, 5, 3)
+                },
+                {
+                    "Infused Staff",
+                    Weapon("Infused Staff", "Covered in markings and scratches, it seems to emanate power.", next_id++, 2, 1, 25, 100, 10, 5)
+                },
+                {
+                    "Cut Wand",
+                    Weapon("Cut Wand", "A small wand, it can be aimed to cast certain, more powerful \nspells.", next_id++, 2, 1, 55, 100, 50, 25)
+                },
+                {
+                    "Nuja Wand",
+                    Weapon("Nuja Wand", "A wand passed down through the ages. Holds a rhythmic power.", next_id++, 4, 1, 120, 100, 100, 75)
+                },
+                {
+                    "F.I.L.O.",
+                    Weapon("F.I.L.O.", "F.I.L.O is a staff made as a tribute to a human who died in an \naccident. Just you holding it brings back depressed memories.", next_id++, 5, 1, 200, 100, 150, 100)
+                },
+                {
+                    "Staff of Mythos",
+                    Weapon("Staff of Mythos", "This staff holds the power from the great eldritch monsters. \nIt was found by a human when he destroyed the eldritch beings on his planet. \nHolds the souls of all the eldritch monsters.", next_id++, 10, 1, 350, 100, 1000, 750)
+                },
+                {
+                    "Leather Gloves",
+                    Weapon("Leather Gloves", "Torn up, burnt, and dipped in acid. These leather gloves are \nwell-worn.", next_id++, 7, 0, 0, 99, 5, 3)
+                },
+                {
+                    "Red Rubber Gloves",
+                    Weapon("Red Rubber Gloves", "Somebody used these one time.", next_id++, 15, 0, 0, 99, 30, 20)
+                },
+                {
+                    "Brass Knuckles",
+                    Weapon("Brass Knuckles", "Packs a punch, and a pierce. The brass knuckles are light and \npowerful.", next_id++, 40, 0, 0, 99, 60, 50)
+                },
+                {
+                    "Power Glove",
+                    Weapon("Power Glove", "Confused with the techinical masterpiece often. The powerglove \nexplodes on impact.", next_id++, 75, 0, 0, 99, 150, 125)
+                },
+                {
+                    "Torched Wristband",
+                    Weapon("Torched Wristband", "Although not connected to the fists, the Torched Wristband \ninfuses the hand with strong power, also producing an explosion \nin the process.", next_id++, 150, 0, 0, 99, 750, 500)
+                },
+                {
+                    "Hell-Forged Wristband",
+                    Weapon("Hell-Forged Wristband", "Infuses the user with a large amount of strength so powerful, it \ncould destroy a building in one hit. The Hell-Forged wristband was \nused by a head executioner to keep control of his troops.", next_id++, 300, 0, 0, 99, 1750, 1400)
+                }
             };
         public:
             // Generates a reference to an item in the table.
@@ -412,22 +484,22 @@ using namespace ItemSystem::Container;
 ////////////////WEAPONSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS STructs.
 /*
 struct Weapon {
-    string wep_name;
-    string wep_desc;
-    int getDamage();
-    int getCrit();
-    int wep_type;
-    int wep_spelldam;
-    int getBuyPrice();
-    int getAccuracy();
+string wep_name;
+string wep_desc;
+int getDamage();
+int getCrit();
+int wep_type;
+int wep_spelldam;
+int getBuyPrice();
+int getAccuracy();
 };
 
 struct Consumable {
-    string con_name;
-    int con_healgain;
-    int con_managain;
-    int con_type;
-    int con_cost;
+string con_name;
+int con_healgain;
+int con_managain;
+int con_type;
+int con_cost;
 };
 */
 
@@ -452,91 +524,91 @@ void chargen();
 
 /*
 const vector<Consumable> consumableTable{
-    What does this mean... though?
-    Name
-    Health Gain
-    Mana Gain
-    Type (1 = Health Potion, 2 = Mana Potion)
-    Cost
-    ///Health Potions
-    { "Normal Health Potion", 25, 0, 1, 5 },
-    { "Greater Health Potion", 100, 0, 1, 15, },
-    { "Super Health Potion", 500, 0, 1, 50 },
-    { "Full Health Potion", 9999, 0, 1, 150 },
-    ///Mana Potions
-    { "Normal Mana Potion", 0, 5, 2, 5 },
-    { "Greater Mana Potion", 0, 25, 2, 10 },
-    { "Super Mana Potion", 0, 100, 2, 35 },
-    { "Full Mana Potion", 0, 9999, 2, 100 }
+What does this mean... though?
+Name
+Health Gain
+Mana Gain
+Type (1 = Health Potion, 2 = Mana Potion)
+Cost
+///Health Potions
+{ "Normal Health Potion", 25, 0, 1, 5 },
+{ "Greater Health Potion", 100, 0, 1, 15, },
+{ "Super Health Potion", 500, 0, 1, 50 },
+{ "Full Health Potion", 9999, 0, 1, 150 },
+///Mana Potions
+{ "Normal Mana Potion", 0, 5, 2, 5 },
+{ "Greater Mana Potion", 0, 25, 2, 10 },
+{ "Super Mana Potion", 0, 100, 2, 35 },
+{ "Full Mana Potion", 0, 9999, 2, 100 }
 
 };
 
 const vector<Weapon> weapon_table{
-    /*What this means (In order!)
-    Name
-    Description
-    Damage
-    Crit Chance
-    Its Type (1 = Bow, 2 = Sword, 3 = Staff, 4 = Unarmed, 5 = Beginning Weapon (No Profficiency Bonus), 3267 = Dev Weapon)
-    Spell damage bonus (Only for staffs)
-    Cost (In Dust)
-    Accuracy
-    */
-    ///BOWS
-    /*
-    { "Wooden Bow", "A starter weapon for most hunters in training.", 3, 5, 1, 0, 10, 50 }, //Wooden Bow, 3 Damage, 5 Crit Chance, Bow Type, 0 Spell Damage, 10 Dust Cost
-    { "Reinforced Bow", "A more unique and composed wooden bow.", 7, 10, 1, 0, 30, 60 }, //Reinforced Bow, 7 Damage, 10 Crit Chance, Bow Type, 0 Spell Damage, 30 Dust Cost
-    { "Iron Bow", "Forged in some unholy Audi'je's home, this bow is made from \nreguritated iron.", 15, 15, 1, 0, 60, 70 }, //Iron Bow, 15 Damage, 15 Crit Chance, Bow Type, 0 Spell Damage, 60 Dust Cost
-    { "Tactical Compound Bow", "A bow with a 16x optical scope, strap, and a better string.", 35, 20, 1, 0, 100, 100 }, //Tactical Compound Bow, 35 Damage, 20 Crit Chance, Bow Type, 0 Spell Damage, 100 Dust Cost
-    { "Meteor Bow", "Forged from a passing meteor, nicknamed MB-132. Incredibly rare.", 50, 25, 1, 0, 250, 75 }, //Meteor Bow, 50 Damage, 25 Crit Chance, Bow Type, 0 Spell Damage, 250 Dust Cost
-    { "Star Bow", "This bow has an unkown origin, it's only main feature is the\ndistinct glow the arrows make when fired. The bow seems to possess a special \npower... The power of light.", 100, 50, 1, 0, 1000, 75 }, //Star, 100 Damage, 50 Crit Chance, Bow Type, 0 Spell Damage, 1000 Dust Cost
-        */        /*                                                                                                                                                                                                       ///SWORDS
-    { "Copper Shortsword", "A flimsy blade, made from the cheapest material on the planet.", 5, 1, 2, 0, 15, 90 }, //Copper Shortsword, 5 Damage, 1 Crit Chance, Sword Type, 0 Spell Damage, 15 Dust Cost
-    { "Iron Blade", "A less flimsy blade, made from less-cheaper materials.", 9, 2, 2, 0, 30, 90 }, //Iron Blade, 9 Damage, 2 Crit Chance, Sword Type, 0 Spell Damage, 30 Dust Cost
-    { "Steel Blade", "A blade made out of a semi-usable material. Not the best, or \nworst.", 20, 3, 2, 0, 75, 95 }, //Steel Blade, 20 Damage, 3 Crit Chance, Sword Type, 0 Spell Damage, 75 Dust Cost
-    { "Obsidian Longsword", "A dangerous weapon, a major step-up from the previous blades.", 50, 4, 2, 0, 150, 80 }, //Obsidian Longsword, 50 Damage, 4 Crit Chance, Sword Type, 0 Spell Damage, 150 Dust Cost
-    { "Core Lightblade", "The sword forged inside the planet's core. Has a obsidian blade \nwith magma flowing around it.", 100, 4, 2, 0, 500, 95 }, //Core, 100 Damage, 4 Crit Chance, Sword Type, 0 Spell Damage, 500 Dust Cost
-    { "The Singularity Blade", "Cuts with astronomical force, created from a god of the past.\nThe blade is complicated and overdone in features, filling a part of the\nblade with a moral of rebirth.", 200, 3, 2, 0 , 1500, 95 }, //The Singularity Blade, 200 Damage, 3 Crit Chance, Sword Type, 0 Spell Damage, 75 Dust Cost
-                                                                                                                                                                                                                                     ///STAFFS
-    { "Wooden Staff", "A wooden stick with some message in an unknown language cut in on \nthe side.", 1, 0, 3, 15, 5, 100 }, //Wooden Staff, 1 Damage, 0 Crit Chance, Staff/Wand Type, 15 Spell Damage, 5 Dust Cost
-    { "Infused Staff", "Covered in markings and scratches, it seems to emanate power.", 2, 1, 3, 25, 10, 100 }, // Infused Staff, 2 Damage, 1 Crit Chance, Staff/Wand Type, 25 Spell Damage, 10 Dust Cost
-    { "Cut Wand", "A small wand, it can be aimed to cast certain, more powerful \nspells.", 2, 1, 3, 55, 50, 100 }, //Cut Wand, 2 Damage, 1 Crit Chance, Staff/Wand Type, 80 Spell Damage, 50 Dust Cost
-    { "Nuja Wand", "A wand passed down through the ages. Holds a rhythmic power.", 4, 1, 3, 120, 100, 100 },  //Nuja Staff, 4 Damage, 1 Crit Chance, Staff/Wand Type, 120 Spell Damage, 100 Dust Cost
-    { "F.I.L.O.", "F.I.L.O is a staff made as a tribute to a human who died in an \naccident. Just you holding it brings back depressed memories.", 5, 1, 3, 200, 150, 100 },  //T.I.L.O, 5 Damage, 1 Crit Chance, Staff/Wand Type, 200 Spell Damage, 150 Dust Cost
-    { "Staff of Mythos", "This staff holds the power from the great eldritch monsters. \nIt was found by a human when he destroyed the eldritch beings on his planet. \nHolds the souls of all the eldritch monsters.", 10, 1, 3, 350, 1000, 100 },  //Staff of Mythos, 10 Damage, 1 Crit Chance, Staff/Wand Type, 350 Spell Damage, 1000 Dust Cost
-                                                                                                                                                                                                                                                    ///UNARMED
-    { "Leather Gloves", "Torn up, burnt, and dipped in acid. These leather gloves are \nwell-worn.", 7, 0, 4, 0, 5, 99 }, //Leather Glove, 7 Damage, 0 Crit Chance, Unarmed Type, 0 Spell Damage, 5 Dust Cost
-    { "Red Rubber Gloves", "Somebody used these one time.", 15, 0, 4, 0, 30, 99 }, //Red Rubber Gloves, 15 Damage, 0 Crit Chance, Unarmed Type, 0 Spell Damage, 30 Dust Cost
-    { "Brass Knuckles", "Packs a punch, and a pierce. The brass knuckles are light and \npowerful.", 40, 0, 4, 0, 60, 99 }, //Brass Knuckles, 40 Damage, 0 Crit Chance, Unarmed Type, 0 Spell Damage, 60 Dust Cost
-    { "Power Glove", "Confused with the techinical masterpiece often. The powerglove \nexplodes on impact.", 75, 0, 4, 0, 150, 99 }, //Power Glove, 75 Damage, 0 Crit Chance, Unarmed Type, 0 Spell Damage, 150 Dust Cost
-    { "Torched Wristband", "Although not connected to the fists, the Torched Wristband \ninfuses the hand with strong power, also producing an explosion \nin the process.", 150, 0, 4, 0, 750, 99 }, //Torched Wristband, 150 Damage, 0 Crit Chance, Unarmed Type, 0 Spell Damage, 750 Dust Cost
-    { "Hell-Forged Wristband", "Infuses the user with a large amount of strength so powerful, it \ncould destroy a building in one hit. The Hell-Forged wristband was \nused by a head executioner to keep control of his troops.", 300, 0, 4, 0, 1750, 99 }, //Hell-Forged Wristband, 300 Damage, 0 Crit Chance, Unarmed Type, 0 Spell Damage, 1750 Dust Cost
-                                                                                                                                                                                                                                                              ///Beginning Weapon
-    { "Stick", "Useless, cannot gain any profficiency bonuses.", 1, 0, 5, 1, 0, 100 }, //Stick, 1 Damage, 0 Crit Chance, Starter Weapon Type, 1 Spell Damage, 0 Dust Cost
-                                                                                       ///Dev Weapon
-    { "Modal Soul", "Wait!", 9999, 100, 3267, 9999, 9999, 100 } //Modal Soul, 9999 Damage, 100 Crit Chance, Dev Type, 9999 Spell Damage, 9999 Dust Cost
+/*What this means (In order!)
+Name
+Description
+Damage
+Crit Chance
+Its Type (1 = Bow, 2 = Sword, 3 = Staff, 4 = Unarmed, 5 = Beginning Weapon (No Profficiency Bonus), 3267 = Dev Weapon)
+Spell damage bonus (Only for staffs)
+Cost (In Dust)
+Accuracy
+*/
+///BOWS
+/*
+{ "Wooden Bow", "A starter weapon for most hunters in training.", 3, 5, 1, 0, 10, 50 }, //Wooden Bow, 3 Damage, 5 Crit Chance, Bow Type, 0 Spell Damage, 10 Dust Cost
+{ "Reinforced Bow", "A more unique and composed wooden bow.", 7, 10, 1, 0, 30, 60 }, //Reinforced Bow, 7 Damage, 10 Crit Chance, Bow Type, 0 Spell Damage, 30 Dust Cost
+{ "Iron Bow", "Forged in some unholy Audi'je's home, this bow is made from \nreguritated iron.", 15, 15, 1, 0, 60, 70 }, //Iron Bow, 15 Damage, 15 Crit Chance, Bow Type, 0 Spell Damage, 60 Dust Cost
+{ "Tactical Compound Bow", "A bow with a 16x optical scope, strap, and a better string.", 35, 20, 1, 0, 100, 100 }, //Tactical Compound Bow, 35 Damage, 20 Crit Chance, Bow Type, 0 Spell Damage, 100 Dust Cost
+{ "Meteor Bow", "Forged from a passing meteor, nicknamed MB-132. Incredibly rare.", 50, 25, 1, 0, 250, 75 }, //Meteor Bow, 50 Damage, 25 Crit Chance, Bow Type, 0 Spell Damage, 250 Dust Cost
+{ "Star Bow", "This bow has an unkown origin, it's only main feature is the\ndistinct glow the arrows make when fired. The bow seems to possess a special \npower... The power of light.", 100, 50, 1, 0, 1000, 75 }, //Star, 100 Damage, 50 Crit Chance, Bow Type, 0 Spell Damage, 1000 Dust Cost
+*/        /*                                                                                                                                                                                                       ///SWORDS
+{ "Copper Shortsword", "A flimsy blade, made from the cheapest material on the planet.", 5, 1, 2, 0, 15, 90 }, //Copper Shortsword, 5 Damage, 1 Crit Chance, Sword Type, 0 Spell Damage, 15 Dust Cost
+{ "Iron Blade", "A less flimsy blade, made from less-cheaper materials.", 9, 2, 2, 0, 30, 90 }, //Iron Blade, 9 Damage, 2 Crit Chance, Sword Type, 0 Spell Damage, 30 Dust Cost
+{ "Steel Blade", "A blade made out of a semi-usable material. Not the best, or \nworst.", 20, 3, 2, 0, 75, 95 }, //Steel Blade, 20 Damage, 3 Crit Chance, Sword Type, 0 Spell Damage, 75 Dust Cost
+{ "Obsidian Longsword", "A dangerous weapon, a major step-up from the previous blades.", 50, 4, 2, 0, 150, 80 }, //Obsidian Longsword, 50 Damage, 4 Crit Chance, Sword Type, 0 Spell Damage, 150 Dust Cost
+{ "Core Lightblade", "The sword forged inside the planet's core. Has a obsidian blade \nwith magma flowing around it.", 100, 4, 2, 0, 500, 95 }, //Core, 100 Damage, 4 Crit Chance, Sword Type, 0 Spell Damage, 500 Dust Cost
+{ "The Singularity Blade", "Cuts with astronomical force, created from a god of the past.\nThe blade is complicated and overdone in features, filling a part of the\nblade with a moral of rebirth.", 200, 3, 2, 0 , 1500, 95 }, //The Singularity Blade, 200 Damage, 3 Crit Chance, Sword Type, 0 Spell Damage, 75 Dust Cost
+///STAFFS
+{ "Wooden Staff", "A wooden stick with some message in an unknown language cut in on \nthe side.", 1, 0, 3, 15, 5, 100 }, //Wooden Staff, 1 Damage, 0 Crit Chance, Staff/Wand Type, 15 Spell Damage, 5 Dust Cost
+{ "Infused Staff", "Covered in markings and scratches, it seems to emanate power.", 2, 1, 3, 25, 10, 100 }, // Infused Staff, 2 Damage, 1 Crit Chance, Staff/Wand Type, 25 Spell Damage, 10 Dust Cost
+{ "Cut Wand", "A small wand, it can be aimed to cast certain, more powerful \nspells.", 2, 1, 3, 55, 50, 100 }, //Cut Wand, 2 Damage, 1 Crit Chance, Staff/Wand Type, 80 Spell Damage, 50 Dust Cost
+{ "Nuja Wand", "A wand passed down through the ages. Holds a rhythmic power.", 4, 1, 3, 120, 100, 100 },  //Nuja Staff, 4 Damage, 1 Crit Chance, Staff/Wand Type, 120 Spell Damage, 100 Dust Cost
+{ "F.I.L.O.", "F.I.L.O is a staff made as a tribute to a human who died in an \naccident. Just you holding it brings back depressed memories.", 5, 1, 3, 200, 150, 100 },  //T.I.L.O, 5 Damage, 1 Crit Chance, Staff/Wand Type, 200 Spell Damage, 150 Dust Cost
+{ "Staff of Mythos", "This staff holds the power from the great eldritch monsters. \nIt was found by a human when he destroyed the eldritch beings on his planet. \nHolds the souls of all the eldritch monsters.", 10, 1, 3, 350, 1000, 100 },  //Staff of Mythos, 10 Damage, 1 Crit Chance, Staff/Wand Type, 350 Spell Damage, 1000 Dust Cost
+///UNARMED
+{ "Leather Gloves", "Torn up, burnt, and dipped in acid. These leather gloves are \nwell-worn.", 7, 0, 4, 0, 5, 99 }, //Leather Glove, 7 Damage, 0 Crit Chance, Unarmed Type, 0 Spell Damage, 5 Dust Cost
+{ "Red Rubber Gloves", "Somebody used these one time.", 15, 0, 4, 0, 30, 99 }, //Red Rubber Gloves, 15 Damage, 0 Crit Chance, Unarmed Type, 0 Spell Damage, 30 Dust Cost
+{ "Brass Knuckles", "Packs a punch, and a pierce. The brass knuckles are light and \npowerful.", 40, 0, 4, 0, 60, 99 }, //Brass Knuckles, 40 Damage, 0 Crit Chance, Unarmed Type, 0 Spell Damage, 60 Dust Cost
+{ "Power Glove", "Confused with the techinical masterpiece often. The powerglove \nexplodes on impact.", 75, 0, 4, 0, 150, 99 }, //Power Glove, 75 Damage, 0 Crit Chance, Unarmed Type, 0 Spell Damage, 150 Dust Cost
+{ "Torched Wristband", "Although not connected to the fists, the Torched Wristband \ninfuses the hand with strong power, also producing an explosion \nin the process.", 150, 0, 4, 0, 750, 99 }, //Torched Wristband, 150 Damage, 0 Crit Chance, Unarmed Type, 0 Spell Damage, 750 Dust Cost
+{ "Hell-Forged Wristband", "Infuses the user with a large amount of strength so powerful, it \ncould destroy a building in one hit. The Hell-Forged wristband was \nused by a head executioner to keep control of his troops.", 300, 0, 4, 0, 1750, 99 }, //Hell-Forged Wristband, 300 Damage, 0 Crit Chance, Unarmed Type, 0 Spell Damage, 1750 Dust Cost
+///Beginning Weapon
+{ "Stick", "Useless, cannot gain any profficiency bonuses.", 1, 0, 5, 1, 0, 100 }, //Stick, 1 Damage, 0 Crit Chance, Starter Weapon Type, 1 Spell Damage, 0 Dust Cost
+///Dev Weapon
+{ "Modal Soul", "Wait!", 9999, 100, 3267, 9999, 9999, 100 } //Modal Soul, 9999 Damage, 100 Crit Chance, Dev Type, 9999 Spell Damage, 9999 Dust Cost
 };
 
 Weapon WeaponTable.generate(string name)
 {
-    auto w = std::find_if(weapon_table.begin(), weapon_table.end(), [name](const Weapon& item) {
-        return item.wep_name == name;
-    });
-    return weapon_table.at(std::distance(weapon_table.begin(), w));
+auto w = std::find_if(weapon_table.begin(), weapon_table.end(), [name](const Weapon& item) {
+return item.wep_name == name;
+});
+return weapon_table.at(std::distance(weapon_table.begin(), w));
 }
 
 // Finds the consumable but doesn't copy it. Use for printing out data of consumables that aren't going to be added to the inventory.
 const Consumable& findConsumable(string name)
 {
-    auto index = std::find_if(consumableTable.begin(), consumableTable.end(), [name](const Consumable& item) {
-        return item.con_name == name;
-    });
-    return consumableTable.at(std::distance(consumableTable.begin(), index));
+auto index = std::find_if(consumableTable.begin(), consumableTable.end(), [name](const Consumable& item) {
+return item.con_name == name;
+});
+return consumableTable.at(std::distance(consumableTable.begin(), index));
 }
 // Gets a Consumable instance from the consumable table. Use to add to inventory.
 Consumable getConsumable(string name)
 {
-    return Consumable(findConsumable(name));
+return Consumable(findConsumable(name));
 }
 
 */
@@ -667,7 +739,7 @@ void inventory() {
     cin >> input;
     switch (input) {
     case 0:
-            break;
+        break;
     case 1:
         weaponinv();
         break;
@@ -1740,6 +1812,7 @@ int main()
     case 3267:
         cout << "Quickstart activated. Giving DEV Weapon." << endl;
         Charac.inventory.addItem(WeaponTable.generate("Modal Soul"));
+        Charac.equipped = const_cast<Weapon*>(dynamic_cast<const Weapon*>(Charac.inventory.inspectItem(0)));
         Charac.dust = 99999;
         cin >> Charac.dad;
         for (size_t i = 0; i < Charac.dad.size(); i++) {
