@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <map>
 #include <memory>
+#include <utility>
 #include <stdexcept>
 
 using namespace std;
@@ -320,6 +321,14 @@ namespace ItemSystem
 				{
 					"Normal Health Potion",
 					Consumable("Normal Health Potion", "Heals 25 HP ", next_id++, 25, 0, 15, 3)
+				},
+				{
+					"Greater Health Potion",
+					Consumable("Greater Health Potion", "Heals 100 HP", next_id++, 100, 0, 45, 20)
+				},
+				{
+					"Super Health Potion",
+					Consumable("Super Health Potion", "Heals 500 HP", next_id++, 500, 0, 100, 50)
 				}
 			};
 		public:
@@ -614,6 +623,7 @@ return Consumable(findConsumable(name));
 */
 
 int input;
+void inventory();
 
 struct Enemy
 {
@@ -704,30 +714,26 @@ void wait_enter(void) //Method of wait_enter, call it to create a Press Enter to
 	cin.ignore();
 }
 
-///Charac.inventory.at(0).wep_name
-///WeaponTable.generate("Wooden Bow"),
-///WeaponTable.generate("Reinforced Bow")
-
 void weaponinv() {
-    ClearScreen();
-    cout << "-*- Inventory -*-\nCurrent Weapon: " << Charac.equipped->getName() << "\nDescription: " << Charac.equipped->getDesc() << endl;
-    cout << "\n-*- Weapon Stats -*-\nDamage: " << Charac.equipped->getDamage() << "\nCrit Bonus: " << Charac.equipped->getCrit() << "\nSpell Damage: " << Charac.equipped->getSpellDamage() << "\nAccuracy: " << Charac.equipped->getAccuracy() << "\nWeapon Cost: " << Charac.equipped->getBuyPrice() << "\n" << endl;
-    int index = 1;
-    cout << "0) Exit" << endl;
-    std::vector<Weapon*> weapons;
-    for(const auto& item : Charac.inventory.getAll()) {
-        if(item.getItem()->getCategory() == Category::WEAPON) {
-            auto toCast = item.getItem().get();
-            auto weapon = const_cast<Weapon*>(dynamic_cast<const Weapon*>(toCast));
-            weapons.push_back(weapon);
-            }
-    }
-    for (const auto& wep : weapons)
-    {
-        cout << index << ") " << wep->getName() << std::endl;
-        index++;
-    }
-    cin >> input;
+	ClearScreen();
+	cout << "-*- Inventory -*-\nCurrent Weapon: " << Charac.equipped->getName() << "\nDescription: " << Charac.equipped->getDesc() << endl;
+	cout << "\n-*- Weapon Stats -*-\nDamage: " << Charac.equipped->getDamage() << "\nCrit Bonus: " << Charac.equipped->getCrit() << "\nSpell Damage: " << Charac.equipped->getSpellDamage() << "\nAccuracy: " << Charac.equipped->getAccuracy() << "\nWeapon Cost: " << Charac.equipped->getBuyPrice() << "\n" << endl;
+	int index = 1;
+	cout << "0) Exit" << endl;
+	std::vector<Weapon*> weapons;
+	for (const auto& item : Charac.inventory.getAll()) {
+		if (item.getItem()->getCategory() == Category::WEAPON) {
+			auto toCast = item.getItem().get();
+			auto weapon = const_cast<Weapon*>(dynamic_cast<const Weapon*>(toCast));
+			weapons.push_back(weapon);
+		}
+	}
+	for (const auto& wep : weapons)
+	{
+		cout << index << ") " << wep->getName() << std::endl;
+		index++;
+	}
+	cin >> input;
 	if (input == 0) {
 
 	}
@@ -738,28 +744,32 @@ void weaponinv() {
 }
 
 void consuminv() {
-int index = 1;
-cout << "0) Exit" << endl;
-  std::vector<Consumable*> consumables;
-    for(const auto& item : Charac.inventory.getAll()) {
-        if(item.getItem()->getCategory() == Category::CONSUMABLE) {
-            auto toCast = item.getItem().get();
-            auto consumable = const_cast<Consumable*>(dynamic_cast<const Consumable*>(toCast));
-            consumables.push_back(consumable);
-            }
-    }
-for(const auto& item : Charac.inventory.getAll()) {
-    if(item.getItem()->getCategory() == Category::CONSUMABLE) {
-        std::cout << index << ") " << item.getItem()->getName() << std::endl;
-        index++;
-    }
-    cin >> input;
-    if(input == 0) {
-
-    } else if(input != 0) {
-
-    }
-}
+	unsigned int index = 0;
+	cout << "0) Exit" << endl;
+	// Filter inventory into vector.
+	std::vector<std::pair<Consumable*, unsigned int>> filtered;
+	for (const auto& item : Charac.inventory.getAll()) {
+		if (item.getItem()->getCategory() == Category::CONSUMABLE) {
+			auto consumable = const_cast<Consumable*>(dynamic_cast<const Consumable*>(item.getItem().get()));
+			filtered.push_back(std::make_pair(consumable, index));
+			std::cout << filtered.size() << ") " << consumable->getName() << " x" << item.getStackAmount() << std::endl;
+		}
+		index++;
+	}
+	// Get input;
+	unsigned int userInput;
+	std::cin >> userInput;
+	if (userInput == 0) return;
+	userInput--;
+	// Take item and use it.
+	unsigned int takenInput = filtered.at(userInput).second;
+	auto takenItem = filtered.at(userInput).first;
+	Charac.hp += takenItem->getHealth();
+	Charac.mp += takenItem->getMana();
+	// Print info.
+	std::cout << "You restore " << takenItem->getHealth() << " HP and " << takenItem->getMana() << " MP!" << endl;
+	Charac.inventory.deleteItem(takenInput);
+	wait_enter();
 }
 
 void inventory() {
@@ -910,6 +920,7 @@ void battle() {
 				acchit = rand() % 200;
 				if (acchit > Charac.equipped->getAccuracy()) {
 					cout << "You miss..." << endl;
+					enemyturn();
 				}
 				else if (acchit < Charac.equipped->getAccuracy()) {
 					randint = rand() % 100;
@@ -933,6 +944,7 @@ void battle() {
 				acchit = rand() % 90;
 				if (acchit > Charac.equipped->getAccuracy()) {
 					cout << "You miss..." << endl;
+					enemyturn();
 				}
 				else if (acchit < Charac.equipped->getAccuracy()) {
 					randint = rand() % 100;
@@ -956,14 +968,15 @@ void battle() {
 				acchit = rand() % 100;
 				if (acchit > Charac.equipped->getAccuracy()) {
 					cout << "You miss..." << endl;
+					enemyturn();
 				}
 				else if (randint > Charac.crt + Charac.equipped->getCrit()) {
-						randamage = rand() % Charac.equipped->getDamage() + Charac.str * Acc.rightarmdamagex + Charac.leftarmhp + Charac.rightarmhp * 2;
-						cout << "You get a critical hit! Dealing " << randamage << " damage to the enemy,\nand dealing " << bodydamage << " body part damage" << endl;
-						Enemy.ehp = Enemy.ehp - randamage;
-						Enemy.erightarmhp = Enemy.erightarmhp - bodydamage;
-						enemyturn();
-					}
+					randamage = rand() % Charac.equipped->getDamage() + Charac.str * Acc.rightarmdamagex + Charac.leftarmhp + Charac.rightarmhp * 2;
+					cout << "You get a critical hit! Dealing " << randamage << " damage to the enemy,\nand dealing " << bodydamage << " body part damage" << endl;
+					Enemy.ehp = Enemy.ehp - randamage;
+					Enemy.erightarmhp = Enemy.erightarmhp - bodydamage;
+					enemyturn();
+				}
 				else if (acchit < Charac.equipped->getAccuracy()) {
 					randamage = rand() % Charac.equipped->getDamage() + Charac.str * Acc.rightarmdamagex + Charac.leftarmhp + Charac.rightarmhp;
 					cout << "You hit the enemy, dealing " << randamage << " damage to the enemy,\nand dealing " << bodydamage << " body part damage" << endl;
@@ -977,14 +990,15 @@ void battle() {
 				acchit = rand() % 100;
 				if (acchit > Charac.equipped->getAccuracy()) {
 					cout << "You miss..." << endl;
+					enemyturn();
 				}
 				else if (randint > Charac.crt + Charac.equipped->getCrit()) {
-						randamage = rand() % Charac.equipped->getDamage() + Charac.str * Acc.chestdamagex + Charac.leftarmhp + Charac.rightarmhp * 2;
-						cout << "You get a critical hit! Dealing " << randamage << " damage to the enemy,\nand dealing " << bodydamage << " body part damage" << endl;
-						Enemy.ehp = Enemy.ehp - randamage;
-						Enemy.eleftarmhp = Enemy.eleftarmhp - bodydamage;
-						enemyturn();
-					}
+					randamage = rand() % Charac.equipped->getDamage() + Charac.str * Acc.chestdamagex + Charac.leftarmhp + Charac.rightarmhp * 2;
+					cout << "You get a critical hit! Dealing " << randamage << " damage to the enemy,\nand dealing " << bodydamage << " body part damage" << endl;
+					Enemy.ehp = Enemy.ehp - randamage;
+					Enemy.eleftarmhp = Enemy.eleftarmhp - bodydamage;
+					enemyturn();
+				}
 				else if (acchit < Charac.equipped->getAccuracy()) {
 					randamage = rand() % Charac.equipped->getDamage() + Charac.str * Acc.leftarmdamagex;
 					cout << "You hit the enemy, dealing " << randamage << " damage to the enemy,\nand dealing " << bodydamage << " body part damage" << endl;
@@ -997,13 +1011,15 @@ void battle() {
 				acchit = rand() % 100;
 				if (acchit > Charac.equipped->getAccuracy()) {
 					cout << "You miss..." << endl;
-				} else if (randint > Charac.crt + Charac.equipped->getCrit()) {
-						randamage = rand() % Charac.equipped->getDamage() + Charac.str * Acc.rightlegdamagex + Charac.leftarmhp + Charac.rightarmhp * 2;
-						cout << "You get a critical hit! Dealing " << randamage << " damage to the enemy,\nand dealing " << bodydamage << " body part damage" << endl;
-						Enemy.ehp = Enemy.ehp - randamage;
-						Enemy.eleftarmhp = Enemy.erightleghp - bodydamage;
-						enemyturn();
-					}
+					enemyturn();
+				}
+				else if (randint > Charac.crt + Charac.equipped->getCrit()) {
+					randamage = rand() % Charac.equipped->getDamage() + Charac.str * Acc.rightlegdamagex + Charac.leftarmhp + Charac.rightarmhp * 2;
+					cout << "You get a critical hit! Dealing " << randamage << " damage to the enemy,\nand dealing " << bodydamage << " body part damage" << endl;
+					Enemy.ehp = Enemy.ehp - randamage;
+					Enemy.eleftarmhp = Enemy.erightleghp - bodydamage;
+					enemyturn();
+				}
 				else if (acchit < Charac.equipped->getAccuracy()) {
 					randamage = rand() % Charac.equipped->getDamage() + Charac.str * Acc.rightlegdamagex;
 					cout << "You hit the enemy, dealing " << randamage << " damage to the enemy,\nand dealing " << bodydamage << " body part damage" << endl;
@@ -1016,13 +1032,15 @@ void battle() {
 				acchit = rand() % 100;
 				if (acchit > Charac.equipped->getAccuracy()) {
 					cout << "You miss..." << endl;
-				} else if (randint > Charac.crt + Charac.equipped->getCrit()) {
-						randamage = rand() % Charac.equipped->getDamage() + Charac.str * Acc.leftlegdamagex + Charac.leftarmhp + Charac.rightarmhp * 2;
-						cout << "You get a critical hit! Dealing " << randamage << " damage to the enemy,\nand dealing " << bodydamage << " body part damage" << endl;
-						Enemy.ehp = Enemy.ehp - randamage;
-						Enemy.eleftleghp = Enemy.eleftleghp - bodydamage;
-						enemyturn();
-					}
+					enemyturn();
+				}
+				else if (randint > Charac.crt + Charac.equipped->getCrit()) {
+					randamage = rand() % Charac.equipped->getDamage() + Charac.str * Acc.leftlegdamagex + Charac.leftarmhp + Charac.rightarmhp * 2;
+					cout << "You get a critical hit! Dealing " << randamage << " damage to the enemy,\nand dealing " << bodydamage << " body part damage" << endl;
+					Enemy.ehp = Enemy.ehp - randamage;
+					Enemy.eleftleghp = Enemy.eleftleghp - bodydamage;
+					enemyturn();
+				}
 				else if (acchit < Charac.equipped->getAccuracy()) {
 					randamage = rand() % Charac.equipped->getDamage() + Charac.str * Acc.leftlegdamagex;
 					cout << "You hit the enemy, dealing " << randamage << " damage to the enemy,\nand dealing " << bodydamage << " body part damage" << endl;
@@ -1052,94 +1070,101 @@ void enemyturn() {
 	randint = rand() % 50;
 	if (randint < Charac.spd) {
 		randamage = rand() % Charac.equipped->getDamage() + Charac.str;
-		cout << "You hit an extra time because of your speed, dealing " << randamage <<  " damage." << endl;
+		cout << "You hit an extra time because of your speed, dealing " << randamage << " damage." << endl;
 		Enemy.ehp -= randamage;
 	}
-  deathcheck();
-  wait_enter();
-  randint = rand() % 2;
-  if(randint <= 1) {
-    if(Enemy.ehp > Enemy.ehp / 2) {
-      acchit = rand() % 100;
-      if(acchit < Enemy.ecrt) {
-      randint = rand() % (Enemy.estr * Enemy.elvl) * (Enemy.erightarmhp + Enemy.eleftarmhp) * 2;
-      cout << "The enemy gets a critical hit! Dealing " << randint << " damage." << endl;
-      Charac.hp -= randint;
-      }
-      else if(acchit > Enemy.ecrt) {
-      randint = rand() % (Enemy.estr * Enemy.elvl) * (Enemy.erightarmhp + Enemy.eleftarmhp);
-      cout << "The enemy attacks! Dealing " << randint << " damage!" << endl;
-      Charac.hp -= randint;
-      }
-    } else if(Enemy.ehp < Enemy.ehp / 2) {
-        randint = rand() % 2;
-        if(randint <= 1) {
-          if(Enemy.emp < 10) {
-             acchit = rand() % 100;
-            if(acchit < Enemy.ecrt) {
-            randint = rand() % (Enemy.estr * Enemy.elvl) * (Enemy.erightarmhp + Enemy.eleftarmhp) * 2;
-            cout << "The enemy gets a critical hit! Dealing " << randint << " damage." << endl;
-            Charac.hp -= randint;
-            }
-            else if(acchit > Enemy.ecrt) {
-            randint = rand() % (Enemy.estr * Enemy.elvl) * (Enemy.erightarmhp + Enemy.eleftarmhp);
-            cout << "The enemy attacks! Dealing " << randint << " damage!" << endl;
-            Charac.hp -= randint;
-            }
-          } else if (Enemy.emp >= 10) {
-            randint = rand() % (Enemy.eitl * Enemy.elvl) + (Enemy.eheadhp);
-            cout << "The enemy heals back " << randint << " hp." << endl;
-            Enemy.ehp += randint;
-            Enemy.emp -= 10;
-          }
-        } else if(randint == 2) {
-           acchit = rand() % 100;
-        if(acchit < Enemy.ecrt) {
-        randint = rand() % (Enemy.estr * Enemy.elvl) * (Enemy.erightarmhp + Enemy.eleftarmhp) * 2;
-        cout << "The enemy gets a critical hit! Dealing " << randint << " damage." << endl;
-        Charac.hp -= randint;
-        }
-        else if(acchit > Enemy.ecrt) {
-        randint = rand() % (Enemy.estr * Enemy.elvl) * (Enemy.erightarmhp + Enemy.eleftarmhp);
-        cout << "The enemy attacks! Dealing " << randint << " damage!" << endl;
-        Charac.hp -= randint;
-      }
-        }
-    }
-  } else if(randint == 2) {
-    randint = rand() % 2;
-    if(randint == 1) {
-    if(Enemy.emp >= 10) {
-      randint = rand() % (Enemy.eitl * Enemy.elvl) + (Enemy.eheadhp);
-      cout << "The enemy casts fireball! Dealing " << randint << " damage!" << endl;
-      Charac.hp -= randint;
-      Enemy.emp -= 10;
-    } else if(Enemy.emp >= 20) {
-      randint = rand() % (Enemy.eitl * Enemy.elvl) + (Enemy.eheadhp) * 2;
-      cout << "The enemy casts lightning! Dealing " << randint << " damage!" << endl;
-      Charac.hp -= randint;
-      Enemy.emp -= 20;
-    } else if(Enemy.emp >= 35) {
-      randint = rand() % (Enemy.eitl * Enemy.elvl) + (Enemy.eheadhp) * 4;
-      cout << "The enemy casts Earthquake! Dealing " << randint << " damage!" << endl;
-      Charac.hp -= randint;
-      Enemy.emp -= 35;
-    }
-  } else if(randint == 2) {
-     acchit = rand() % 100;
-      if(acchit < Enemy.ecrt) {
-      randint = rand() % (Enemy.estr * Enemy.elvl) * (Enemy.erightarmhp + Enemy.eleftarmhp) * 2;
-      cout << "The enemy gets a critical hit! Dealing " << randint << " damage." << endl;
-      Charac.hp -= randint;
-      }
-      else if(acchit > Enemy.ecrt) {
-      randint = rand() % (Enemy.estr * Enemy.elvl) * (Enemy.erightarmhp + Enemy.eleftarmhp);
-      cout << "The enemy attacks! Dealing " << randint << " damage!" << endl;
-      Charac.hp -= randint;
-      }
-  }
-}
-    wait_enter();
+	deathcheck();
+	wait_enter();
+	randint = rand() % 2;
+	if (randint <= 1) {
+		if (Enemy.ehp > Enemy.ehp / 2) {
+			acchit = rand() % 100;
+			if (acchit < Enemy.ecrt) {
+				randint = rand() % (Enemy.estr * Enemy.elvl) * (Enemy.erightarmhp + Enemy.eleftarmhp) * 2;
+				cout << "The enemy gets a critical hit! Dealing " << randint << " damage." << endl;
+				Charac.hp -= randint;
+			}
+			else if (acchit > Enemy.ecrt) {
+				randint = rand() % (Enemy.estr * Enemy.elvl) * (Enemy.erightarmhp + Enemy.eleftarmhp);
+				cout << "The enemy attacks! Dealing " << randint << " damage!" << endl;
+				Charac.hp -= randint;
+			}
+		}
+		else if (Enemy.ehp < Enemy.ehp / 2) {
+			randint = rand() % 2;
+			if (randint <= 1) {
+				if (Enemy.emp < 10) {
+					acchit = rand() % 100;
+					if (acchit < Enemy.ecrt) {
+						randint = rand() % (Enemy.estr * Enemy.elvl) * (Enemy.erightarmhp + Enemy.eleftarmhp) * 2;
+						cout << "The enemy gets a critical hit! Dealing " << randint << " damage." << endl;
+						Charac.hp -= randint;
+					}
+					else if (acchit > Enemy.ecrt) {
+						randint = rand() % (Enemy.estr * Enemy.elvl) * (Enemy.erightarmhp + Enemy.eleftarmhp);
+						cout << "The enemy attacks! Dealing " << randint << " damage!" << endl;
+						Charac.hp -= randint;
+					}
+				}
+				else if (Enemy.emp >= 10) {
+					randint = rand() % (Enemy.eitl * Enemy.elvl) + (Enemy.eheadhp);
+					cout << "The enemy heals back " << randint << " hp." << endl;
+					Enemy.ehp += randint;
+					Enemy.emp -= 10;
+				}
+			}
+			else if (randint == 2) {
+				acchit = rand() % 100;
+				if (acchit < Enemy.ecrt) {
+					randint = rand() % (Enemy.estr * Enemy.elvl) * (Enemy.erightarmhp + Enemy.eleftarmhp) * 2;
+					cout << "The enemy gets a critical hit! Dealing " << randint << " damage." << endl;
+					Charac.hp -= randint;
+				}
+				else if (acchit > Enemy.ecrt) {
+					randint = rand() % (Enemy.estr * Enemy.elvl) * (Enemy.erightarmhp + Enemy.eleftarmhp);
+					cout << "The enemy attacks! Dealing " << randint << " damage!" << endl;
+					Charac.hp -= randint;
+				}
+			}
+		}
+	}
+	else if (randint == 2) {
+		randint = rand() % 2;
+		if (randint == 1) {
+			if (Enemy.emp >= 10) {
+				randint = rand() % (Enemy.eitl * Enemy.elvl) + (Enemy.eheadhp);
+				cout << "The enemy casts fireball! Dealing " << randint << " damage!" << endl;
+				Charac.hp -= randint;
+				Enemy.emp -= 10;
+			}
+			else if (Enemy.emp >= 20) {
+				randint = rand() % (Enemy.eitl * Enemy.elvl) + (Enemy.eheadhp) * 2;
+				cout << "The enemy casts lightning! Dealing " << randint << " damage!" << endl;
+				Charac.hp -= randint;
+				Enemy.emp -= 20;
+			}
+			else if (Enemy.emp >= 35) {
+				randint = rand() % (Enemy.eitl * Enemy.elvl) + (Enemy.eheadhp) * 4;
+				cout << "The enemy casts Earthquake! Dealing " << randint << " damage!" << endl;
+				Charac.hp -= randint;
+				Enemy.emp -= 35;
+			}
+		}
+		else if (randint == 2) {
+			acchit = rand() % 100;
+			if (acchit < Enemy.ecrt) {
+				randint = rand() % (Enemy.estr * Enemy.elvl) * (Enemy.erightarmhp + Enemy.eleftarmhp) * 2;
+				cout << "The enemy gets a critical hit! Dealing " << randint << " damage." << endl;
+				Charac.hp -= randint;
+			}
+			else if (acchit > Enemy.ecrt) {
+				randint = rand() % (Enemy.estr * Enemy.elvl) * (Enemy.erightarmhp + Enemy.eleftarmhp);
+				cout << "The enemy attacks! Dealing " << randint << " damage!" << endl;
+				Charac.hp -= randint;
+			}
+		}
+	}
+	wait_enter();
 }
 
 void explore() {
@@ -1700,25 +1725,31 @@ void blackmarket() {
 				break;
 			}
 			break;
-			case 5:
-            ClearScreen();
-            cout << "-*- Mike's Friendly Store -*-" << endl;
+		case 5:
+			ClearScreen();
+			cout << "-*- Mike's Friendly Store -*-" << endl;
 			cout << "A very disgusting looking teen at the counter greets you as you walk in\n'Welcome to the store. SIR.' He says, with a very punchable face." << endl;
-            cout << "\n1) Normal Health Potion - " << ConsumableTable.generate("Normal Health Potion").getBuyPrice() << endl;
-            cin >> input2;
-            switch(input2) {
-            case 1:
-            cout << "How many would you like to buy? (" << ConsumableTable.generate("Normal Health Potion").getBuyPrice() << " Each)"<< endl;
-            cin >> input2;
-            if(input2 * ConsumableTable.generate("Normal Health Potion").getBuyPrice() > Charac.dust) {
-            cout << "You do not have enough dust!" << endl;
-            home();
-            } else if(input2 * ConsumableTable.generate("Normal Health Potion").getBuyPrice() <= Charac.dust) {
-            cout << "You bought " << input2 << " Normal Health Potions for" << input2 * ConsumableTable.generate("Normal Health Potion").getBuyPrice() << " dust" << endl;
-            }
-            break;
-            }
-            break;
+			cout << "\n1) Normal Health Potion - " << ConsumableTable.generate("Normal Health Potion").getBuyPrice() << " Dust"<< endl;
+			cin >> input2;
+			switch (input2) {
+			case 1:
+				cout << "How many would you like to buy? (" << ConsumableTable.generate("Normal Health Potion").getBuyPrice() << " Each)" << endl;
+				cin >> input2;
+				if (input2 * ConsumableTable.generate("Normal Health Potion").getBuyPrice() > Charac.dust) {
+					cout << "You do not have enough dust!" << endl;
+					wait_enter();
+					home();
+				}
+				else if (input2 * ConsumableTable.generate("Normal Health Potion").getBuyPrice() <= Charac.dust) {
+					cout << "You bought " << input2 << " Normal Health Potions for " << input2 * ConsumableTable.generate("Normal Health Potion").getBuyPrice() << " dust" << endl;
+					Charac.dust -= input2 * ConsumableTable.generate("Normal Health Potion").getBuyPrice();
+					for (std::size_t i = 0; i < input2; ++i)
+						Charac.inventory.addItem(ConsumableTable.generate("Normal Health Potion"));
+					wait_enter();
+				}
+				break;
+			}
+			break;
 		}
 	}
 }
@@ -2047,10 +2078,9 @@ int main()
 		srand(Charac.seed);
 		wait_enter();
 		Charac.inventory.addItem(ConsumableTable.generate("Normal Health Potion"));
-		Charac.inventory.addItems({
-    ConsumableTable.generate("Normal Health Potion"),
-    ConsumableTable.generate("Normal Health Potion")
-});
+		Charac.inventory.addItem(ConsumableTable.generate("Normal Health Potion"));
+		Charac.inventory.addItem(ConsumableTable.generate("Greater Health Potion"));
+		Charac.inventory.addItem(ConsumableTable.generate("Super Health Potion"));
 		home();
 		break;
 	}
