@@ -1,4 +1,4 @@
-//#include "stdafx.h"
+#include "stdafx.h"
 #include <iostream>
 #include <string>
 #include <array>
@@ -331,28 +331,28 @@ namespace ItemSystem
 					Consumable("Super Health Potion", "Heals 500 HP", next_id++, 500, 0, 100, 50)
 				},
 				{
-                    "Full Health Potion",
-                    Consumable("Full Health Potion", "Heals 9999 HP", next_id++, 9999, 0, 300, 150)
+					"Full Health Potion",
+					Consumable("Full Health Potion", "Heals 9999 HP", next_id++, 9999, 0, 300, 150)
 				},
 				{
-                    "Normal Mana Potion",
-                    Consumable("Normal Mana Potion", "Restores 15 MP", next_id++, 0, 15, 10, 5)
+					"Normal Mana Potion",
+					Consumable("Normal Mana Potion", "Restores 15 MP", next_id++, 0, 15, 10, 5)
 				},
 				{
-                    "Greater Mana Potion",
-                    Consumable("Greater Mana Potion", "Restores 45 MP", next_id++, 0, 45, 45, 20)
+					"Greater Mana Potion",
+					Consumable("Greater Mana Potion", "Restores 45 MP", next_id++, 0, 45, 45, 20)
 				},
 				{
-                    "Super Mana Potion",
-                    Consumable("Super Mana Potion", "Restores 100 MP", next_id++, 0, 100, 100, 50)
+					"Super Mana Potion",
+					Consumable("Super Mana Potion", "Restores 100 MP", next_id++, 0, 100, 100, 50)
 				},
 				{
-                    "Full Mana Potion",
-                    Consumable("Full Mana Potion", "Restores 9999 MP", next_id++, 0, 9999, 300, 150)
+					"Full Mana Potion",
+					Consumable("Full Mana Potion", "Restores 9999 MP", next_id++, 0, 9999, 300, 150)
 				},
 				{
-                    "Full Restore",
-                    Consumable("Full Restore", "Restores 9999 MP and 9999 HP", next_id++, 9999, 9999, 500, 250)
+					"Full Restore",
+					Consumable("Full Restore", "Restores 9999 MP and 9999 HP", next_id++, 9999, 9999, 500, 250)
 
 				}
 			};
@@ -659,7 +659,7 @@ struct Character
 } Charac;
 
 void home();
-void enemyturn();
+
 
 void ClearScreen()
 {
@@ -703,12 +703,12 @@ void weaponinv() {
 }
 
 void statcheck() {
-    if(Charac.maxHP > Charac.hp) {
-    Charac.hp = Charac.maxHP;
-    }
-    if(Charac.maxMP > Charac.mp) {
-    Charac.mp = Charac.maxMP;
-    }
+	if (Charac.maxHP > Charac.hp) {
+		Charac.hp = Charac.maxHP;
+	}
+	if (Charac.maxMP > Charac.mp) {
+		Charac.mp = Charac.maxMP;
+	}
 }
 
 void consuminv() {
@@ -761,7 +761,7 @@ void inventory() {
 }
 
 
-
+/*
 void Enemygen() {
 	Enemy.elvl = rand() % Charac.lvl * Charac.difficultyD;
 	Enemy.estr = rand() % Charac.str + Charac.lvl * Charac.difficultyD;
@@ -875,7 +875,7 @@ void playerTurn() {
 		cout << "HP: " << Charac.hp << "      Enemy HP: " << Enemy.ehp << "\nMP: " << Charac.mp << "      Enemy MP: " << Enemy.emp << endl;
 		cout << "\n1) Attack\n2) Cast\n3) Inventory\n4) Run" << endl;
 		cin >> input;
-}
+	}
 }
 
 void enemyTurn() {
@@ -887,14 +887,15 @@ void enemyTurn() {
 }
 
 void decideTurn() {
-    unsigned int turnSpeed = Charac.spd + (rand() % 5 + 1);
-    // Get enemy turn speed.
-    unsigned int enemyTurnSpeed = Enemy.espd + (rand() % 5 + 1);
-     if(turnSpeed > enemyTurnSpeed) {
-        playerTurn();
-    } else {
-        enemyTurn();
-    }
+	unsigned int turnSpeed = Charac.spd + (rand() % 5 + 1);
+	// Get enemy turn speed.
+	unsigned int enemyTurnSpeed = Enemy.espd + (rand() % 5 + 1);
+	if (turnSpeed > enemyTurnSpeed) {
+		playerTurn();
+	}
+	else {
+		enemyTurn();
+	}
 }
 
 
@@ -914,7 +915,7 @@ void explore() {
 		break;
 	}
 }
-
+*/
 void workshop() {
 	ClearScreen();
 	if (Charac.workshopfirst == false) {
@@ -1460,9 +1461,9 @@ void blackmarket() {
 			ClearScreen();
 			cout << "-*- Mike's Friendly Store -*-" << endl;
 			cout << "A very disgusting looking teen at the counter greets you as you walk in\n'Welcome to the store. SIR.' He says, with a very punchable face." << endl;
-			cout << "\n1) Normal Health Potion - " << ConsumableTable.generate("Normal Health Potion").getBuyPrice() << " Dust\n2) Greater Health Potion - " << ConsumableTable.generate("Greater Health Potion").getBuyPrice() << " Dust\n3) Super Health Potion - " << ConsumableTable.generate("Super Health Potion").getBuyPrice() << " Dust"<< endl;
+			cout << "\n1) Normal Health Potion - " << ConsumableTable.generate("Normal Health Potion").getBuyPrice() << " Dust\n2) Greater Health Potion - " << ConsumableTable.generate("Greater Health Potion").getBuyPrice() << " Dust\n3) Super Health Potion - " << ConsumableTable.generate("Super Health Potion").getBuyPrice() << " Dust" << endl;
 			cout << "4) Full Health Potion - " << ConsumableTable.generate("Full Health Potion").getBuyPrice() << " Dust\n\n5) Normal Mana Potion - " << ConsumableTable.generate("Normal Mana Potion").getBuyPrice() << " Dust\n6) Greater Mana Potion - " << ConsumableTable.generate("Greater Mana Potion").getBuyPrice() << " Dust" << endl;
-			cout << "6) Super Mana Potion - " << ConsumableTable.generate("Super Mana Potion").getBuyPrice() << " Dust\n7) Full Mana Potion - " << ConsumableTable.generate("Full Mana Potion").getBuyPrice() << " Dust" << endl;
+			cout << "7) Super Mana Potion - " << ConsumableTable.generate("Super Mana Potion").getBuyPrice() << " Dust\n8) Full Mana Potion - " << ConsumableTable.generate("Full Mana Potion").getBuyPrice() << " Dust" << endl;
 			cin >> input2;
 			switch (input2) {
 			case 1:
@@ -1481,7 +1482,7 @@ void blackmarket() {
 					wait_enter();
 				}
 				break;
-				case 2:
+			case 2:
 				cout << "How many would you like to buy? (" << ConsumableTable.generate("Greater Health Potion").getBuyPrice() << " Each)" << endl;
 				cin >> input2;
 				if (input2 * ConsumableTable.generate("Greater Health Potion").getBuyPrice() > Charac.dust) {
@@ -1494,6 +1495,102 @@ void blackmarket() {
 					Charac.dust -= input2 * ConsumableTable.generate("Greater Health Potion").getBuyPrice();
 					for (std::size_t i = 0; i < input2; ++i)
 						Charac.inventory.addItem(ConsumableTable.generate("Greater Health Potion"));
+					wait_enter();
+				}
+				break;
+			case 3:
+				cout << "How many would you like to buy? (" << ConsumableTable.generate("Super Health Potion").getBuyPrice() << " Each)" << endl;
+				cin >> input2;
+				if (input2 * ConsumableTable.generate("Super Health Potion").getBuyPrice() > Charac.dust) {
+					cout << "You do not have enough dust!" << endl;
+					wait_enter();
+					home();
+				}
+				else if (input2 * ConsumableTable.generate("Super Health Potion").getBuyPrice() <= Charac.dust) {
+					cout << "You bought " << input2 << " Super Health Potions for " << input2 * ConsumableTable.generate("Super Health Potion").getBuyPrice() << " dust" << endl;
+					Charac.dust -= input2 * ConsumableTable.generate("Super Health Potion").getBuyPrice();
+					for (std::size_t i = 0; i < input2; ++i)
+						Charac.inventory.addItem(ConsumableTable.generate("Super Health Potion"));
+					wait_enter();
+				}
+				break;
+			case 4:
+				cout << "How many would you like to buy? (" << ConsumableTable.generate("Full Health Potion").getBuyPrice() << " Each)" << endl;
+				cin >> input2;
+				if (input2 * ConsumableTable.generate("Full Health Potion").getBuyPrice() > Charac.dust) {
+					cout << "You do not have enough dust!" << endl;
+					wait_enter();
+					home();
+				}
+				else if (input2 * ConsumableTable.generate("Full Health Potion").getBuyPrice() <= Charac.dust) {
+					cout << "You bought " << input2 << " Full Health Potions for " << input2 * ConsumableTable.generate("Full Health Potion").getBuyPrice() << " dust" << endl;
+					Charac.dust -= input2 * ConsumableTable.generate("Full Health Potion").getBuyPrice();
+					for (std::size_t i = 0; i < input2; ++i)
+						Charac.inventory.addItem(ConsumableTable.generate("Full Health Potion"));
+					wait_enter();
+				}
+				break;
+			case 5:
+				cout << "How many would you like to buy? (" << ConsumableTable.generate("Normal Mana Potion").getBuyPrice() << " Each)" << endl;
+				cin >> input2;
+				if (input2 * ConsumableTable.generate("Normal Mana Potion").getBuyPrice() > Charac.dust) {
+					cout << "You do not have enough dust!" << endl;
+					wait_enter();
+					home();
+				}
+				else if (input2 * ConsumableTable.generate("Normal Mana Potion").getBuyPrice() <= Charac.dust) {
+					cout << "You bought " << input2 << " Normal Mana Potions for " << input2 * ConsumableTable.generate("Normal Mana Potion").getBuyPrice() << " dust" << endl;
+					Charac.dust -= input2 * ConsumableTable.generate("Normal Mana Potion").getBuyPrice();
+					for (std::size_t i = 0; i < input2; ++i)
+						Charac.inventory.addItem(ConsumableTable.generate("Normal Mana Potion"));
+					wait_enter();
+				}
+				break;
+			case 6:
+				cout << "How many would you like to buy? (" << ConsumableTable.generate("Greater Mana Potion").getBuyPrice() << " Each)" << endl;
+				cin >> input2;
+				if (input2 * ConsumableTable.generate("Greater Mana Potion").getBuyPrice() > Charac.dust) {
+					cout << "You do not have enough dust!" << endl;
+					wait_enter();
+					home();
+				}
+				else if (input2 * ConsumableTable.generate("Greater Mana Potion").getBuyPrice() <= Charac.dust) {
+					cout << "You bought " << input2 << " Greater Mana Potions for " << input2 * ConsumableTable.generate("Greater Mana Potion").getBuyPrice() << " dust" << endl;
+					Charac.dust -= input2 * ConsumableTable.generate("Greater Mana Potion").getBuyPrice();
+					for (std::size_t i = 0; i < input2; ++i)
+						Charac.inventory.addItem(ConsumableTable.generate("Greater Mana Potion"));
+					wait_enter();
+				}
+				break;
+			case 7:
+				cout << "How many would you like to buy? (" << ConsumableTable.generate("Super Mana Potion").getBuyPrice() << " Each)" << endl;
+				cin >> input2;
+				if (input2 * ConsumableTable.generate("Super Mana Potion").getBuyPrice() > Charac.dust) {
+					cout << "You do not have enough dust!" << endl;
+					wait_enter();
+					home();
+				}
+				else if (input2 * ConsumableTable.generate("Super Mana Potion").getBuyPrice() <= Charac.dust) {
+					cout << "You bought " << input2 << " Super Mana Potions for " << input2 * ConsumableTable.generate("Super Mana Potion").getBuyPrice() << " dust" << endl;
+					Charac.dust -= input2 * ConsumableTable.generate("Super Mana Potion").getBuyPrice();
+					for (std::size_t i = 0; i < input2; ++i)
+						Charac.inventory.addItem(ConsumableTable.generate("Super Mana Potion"));
+					wait_enter();
+				}
+				break;
+			case 8:
+				cout << "How many would you like to buy? (" << ConsumableTable.generate("Full Mana Potion").getBuyPrice() << " Each)" << endl;
+				cin >> input2;
+				if (input2 * ConsumableTable.generate("Full Mana Potion").getBuyPrice() > Charac.dust) {
+					cout << "You do not have enough dust!" << endl;
+					wait_enter();
+					home();
+				}
+				else if (input2 * ConsumableTable.generate("Full Mana Potion").getBuyPrice() <= Charac.dust) {
+					cout << "You bought " << input2 << " Full Mana Potions for " << input2 * ConsumableTable.generate("Full Mana Potion").getBuyPrice() << " dust" << endl;
+					Charac.dust -= input2 * ConsumableTable.generate("Full Mana Potion").getBuyPrice();
+					for (std::size_t i = 0; i < input2; ++i)
+						Charac.inventory.addItem(ConsumableTable.generate("Full Mana Potion"));
 					wait_enter();
 				}
 				break;
@@ -1513,7 +1610,7 @@ void home() {
 		cin >> input;
 		switch (input) {
 		case 1:
-			explore();
+			//explore();
 			break;
 		case 2:
 			workshop();
