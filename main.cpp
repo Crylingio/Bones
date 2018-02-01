@@ -329,6 +329,31 @@ namespace ItemSystem
 				{
 					"Super Health Potion",
 					Consumable("Super Health Potion", "Heals 500 HP", next_id++, 500, 0, 100, 50)
+				},
+				{
+                    "Full Health Potion",
+                    Consumable("Full Health Potion", "Heals 9999 HP", next_id++, 9999, 0, 300, 150)
+				},
+				{
+                    "Normal Mana Potion",
+                    Consumable("Normal Mana Potion", "Restores 15 MP", next_id++, 0, 15, 10, 5)
+				},
+				{
+                    "Greater Mana Potion",
+                    Consumable("Greater Mana Potion", "Restores 45 MP", next_id++, 0, 45, 45, 20)
+				},
+				{
+                    "Super Mana Potion",
+                    Consumable("Super Mana Potion", "Restores 100 MP", next_id++, 0, 100, 100, 50)
+				},
+				{
+                    "Full Mana Potion",
+                    Consumable("Full Mana Potion", "Restores 9999 MP", next_id++, 0, 9999, 300, 150)
+				},
+				{
+                    "Full Restore",
+                    Consumable("Full Restore", "Restores 9999 MP and 9999 HP", next_id++, 9999, 9999, 500, 250)
+
 				}
 			};
 		public:
@@ -552,75 +577,9 @@ Cost
 
 };
 
-const vector<Weapon> weapon_table{
-/*What this means (In order!)
-Name
-Description
-Damage
-Crit Chance
-Its Type (1 = Bow, 2 = Sword, 3 = Staff, 4 = Unarmed, 5 = Beginning Weapon (No Profficiency Bonus), 3267 = Dev Weapon)
-Spell damage bonus (Only for staffs)
-Cost (In Dust)
-Accuracy
 */
-///BOWS
-/*
-{ "Wooden Bow", "A starter weapon for most hunters in training.", 3, 5, 1, 0, 10, 50 }, //Wooden Bow, 3 Damage, 5 Crit Chance, Bow Type, 0 Spell Damage, 10 Dust Cost
-{ "Reinforced Bow", "A more unique and composed wooden bow.", 7, 10, 1, 0, 30, 60 }, //Reinforced Bow, 7 Damage, 10 Crit Chance, Bow Type, 0 Spell Damage, 30 Dust Cost
-{ "Iron Bow", "Forged in some unholy Audi'je's home, this bow is made from \nreguritated iron.", 15, 15, 1, 0, 60, 70 }, //Iron Bow, 15 Damage, 15 Crit Chance, Bow Type, 0 Spell Damage, 60 Dust Cost
-{ "Tactical Compound Bow", "A bow with a 16x optical scope, strap, and a better string.", 35, 20, 1, 0, 100, 100 }, //Tactical Compound Bow, 35 Damage, 20 Crit Chance, Bow Type, 0 Spell Damage, 100 Dust Cost
-{ "Meteor Bow", "Forged from a passing meteor, nicknamed MB-132. Incredibly rare.", 50, 25, 1, 0, 250, 75 }, //Meteor Bow, 50 Damage, 25 Crit Chance, Bow Type, 0 Spell Damage, 250 Dust Cost
-{ "Star Bow", "This bow has an unkown origin, it's only main feature is the\ndistinct glow the arrows make when fired. The bow seems to possess a special \npower... The power of light.", 100, 50, 1, 0, 1000, 75 }, //Star, 100 Damage, 50 Crit Chance, Bow Type, 0 Spell Damage, 1000 Dust Cost
-*/        /*                                                                                                                                                                                                       ///SWORDS
-{ "Copper Shortsword", "A flimsy blade, made from the cheapest material on the planet.", 5, 1, 2, 0, 15, 90 }, //Copper Shortsword, 5 Damage, 1 Crit Chance, Sword Type, 0 Spell Damage, 15 Dust Cost
-{ "Iron Blade", "A less flimsy blade, made from less-cheaper materials.", 9, 2, 2, 0, 30, 90 }, //Iron Blade, 9 Damage, 2 Crit Chance, Sword Type, 0 Spell Damage, 30 Dust Cost
-{ "Steel Blade", "A blade made out of a semi-usable material. Not the best, or \nworst.", 20, 3, 2, 0, 75, 95 }, //Steel Blade, 20 Damage, 3 Crit Chance, Sword Type, 0 Spell Damage, 75 Dust Cost
-{ "Obsidian Longsword", "A dangerous weapon, a major step-up from the previous blades.", 50, 4, 2, 0, 150, 80 }, //Obsidian Longsword, 50 Damage, 4 Crit Chance, Sword Type, 0 Spell Damage, 150 Dust Cost
-{ "Core Lightblade", "The sword forged inside the planet's core. Has a obsidian blade \nwith magma flowing around it.", 100, 4, 2, 0, 500, 95 }, //Core, 100 Damage, 4 Crit Chance, Sword Type, 0 Spell Damage, 500 Dust Cost
-{ "The Singularity Blade", "Cuts with astronomical force, created from a god of the past.\nThe blade is complicated and overdone in features, filling a part of the\nblade with a moral of rebirth.", 200, 3, 2, 0 , 1500, 95 }, //The Singularity Blade, 200 Damage, 3 Crit Chance, Sword Type, 0 Spell Damage, 75 Dust Cost
-///STAFFS
-{ "Wooden Staff", "A wooden stick with some message in an unknown language cut in on \nthe side.", 1, 0, 3, 15, 5, 100 }, //Wooden Staff, 1 Damage, 0 Crit Chance, Staff/Wand Type, 15 Spell Damage, 5 Dust Cost
-{ "Infused Staff", "Covered in markings and scratches, it seems to emanate power.", 2, 1, 3, 25, 10, 100 }, // Infused Staff, 2 Damage, 1 Crit Chance, Staff/Wand Type, 25 Spell Damage, 10 Dust Cost
-{ "Cut Wand", "A small wand, it can be aimed to cast certain, more powerful \nspells.", 2, 1, 3, 55, 50, 100 }, //Cut Wand, 2 Damage, 1 Crit Chance, Staff/Wand Type, 80 Spell Damage, 50 Dust Cost
-{ "Nuja Wand", "A wand passed down through the ages. Holds a rhythmic power.", 4, 1, 3, 120, 100, 100 },  //Nuja Staff, 4 Damage, 1 Crit Chance, Staff/Wand Type, 120 Spell Damage, 100 Dust Cost
-{ "F.I.L.O.", "F.I.L.O is a staff made as a tribute to a human who died in an \naccident. Just you holding it brings back depressed memories.", 5, 1, 3, 200, 150, 100 },  //T.I.L.O, 5 Damage, 1 Crit Chance, Staff/Wand Type, 200 Spell Damage, 150 Dust Cost
-{ "Staff of Mythos", "This staff holds the power from the great eldritch monsters. \nIt was found by a human when he destroyed the eldritch beings on his planet. \nHolds the souls of all the eldritch monsters.", 10, 1, 3, 350, 1000, 100 },  //Staff of Mythos, 10 Damage, 1 Crit Chance, Staff/Wand Type, 350 Spell Damage, 1000 Dust Cost
-///UNARMED
-{ "Leather Gloves", "Torn up, burnt, and dipped in acid. These leather gloves are \nwell-worn.", 7, 0, 4, 0, 5, 99 }, //Leather Glove, 7 Damage, 0 Crit Chance, Unarmed Type, 0 Spell Damage, 5 Dust Cost
-{ "Red Rubber Gloves", "Somebody used these one time.", 15, 0, 4, 0, 30, 99 }, //Red Rubber Gloves, 15 Damage, 0 Crit Chance, Unarmed Type, 0 Spell Damage, 30 Dust Cost
-{ "Brass Knuckles", "Packs a punch, and a pierce. The brass knuckles are light and \npowerful.", 40, 0, 4, 0, 60, 99 }, //Brass Knuckles, 40 Damage, 0 Crit Chance, Unarmed Type, 0 Spell Damage, 60 Dust Cost
-{ "Power Glove", "Confused with the techinical masterpiece often. The powerglove \nexplodes on impact.", 75, 0, 4, 0, 150, 99 }, //Power Glove, 75 Damage, 0 Crit Chance, Unarmed Type, 0 Spell Damage, 150 Dust Cost
-{ "Torched Wristband", "Although not connected to the fists, the Torched Wristband \ninfuses the hand with strong power, also producing an explosion \nin the process.", 150, 0, 4, 0, 750, 99 }, //Torched Wristband, 150 Damage, 0 Crit Chance, Unarmed Type, 0 Spell Damage, 750 Dust Cost
-{ "Hell-Forged Wristband", "Infuses the user with a large amount of strength so powerful, it \ncould destroy a building in one hit. The Hell-Forged wristband was \nused by a head executioner to keep control of his troops.", 300, 0, 4, 0, 1750, 99 }, //Hell-Forged Wristband, 300 Damage, 0 Crit Chance, Unarmed Type, 0 Spell Damage, 1750 Dust Cost
-///Beginning Weapon
-{ "Stick", "Useless, cannot gain any profficiency bonuses.", 1, 0, 5, 1, 0, 100 }, //Stick, 1 Damage, 0 Crit Chance, Starter Weapon Type, 1 Spell Damage, 0 Dust Cost
-///Dev Weapon
-{ "Modal Soul", "Wait!", 9999, 100, 3267, 9999, 9999, 100 } //Modal Soul, 9999 Damage, 100 Crit Chance, Dev Type, 9999 Spell Damage, 9999 Dust Cost
-};
 
-Weapon WeaponTable.generate(string name)
-{
-auto w = std::find_if(weapon_table.begin(), weapon_table.end(), [name](const Weapon& item) {
-return item.wep_name == name;
-});
-return weapon_table.at(std::distance(weapon_table.begin(), w));
-}
 
-// Finds the consumable but doesn't copy it. Use for printing out data of consumables that aren't going to be added to the inventory.
-const Consumable& findConsumable(string name)
-{
-auto index = std::find_if(consumableTable.begin(), consumableTable.end(), [name](const Consumable& item) {
-return item.con_name == name;
-});
-return consumableTable.at(std::distance(consumableTable.begin(), index));
-}
-// Gets a Consumable instance from the consumable table. Use to add to inventory.
-Consumable getConsumable(string name)
-{
-return Consumable(findConsumable(name));
-}
-
-*/
 
 int input;
 void inventory();
@@ -743,6 +702,15 @@ void weaponinv() {
 	}
 }
 
+void statcheck() {
+    if(Charac.maxHP > Charac.hp) {
+    Charac.hp = Charac.maxHP;
+    }
+    if(Charac.maxMP > Charac.mp) {
+    Charac.mp = Charac.maxMP;
+    }
+}
+
 void consuminv() {
 	unsigned int index = 0;
 	cout << "0) Exit" << endl;
@@ -769,6 +737,7 @@ void consuminv() {
 	// Print info.
 	std::cout << "You restore " << takenItem->getHealth() << " HP and " << takenItem->getMana() << " MP!" << endl;
 	Charac.inventory.deleteItem(takenInput);
+	statcheck();
 	wait_enter();
 }
 
@@ -841,7 +810,7 @@ void victory() {
 	randint = rand() % 15 + Enemy.elvl;
 	cout << "You find " << randint << " dust." << endl;
 	Charac.dust += randint;
-	randint = rand() % Enemy.maxeHP * Enemy.elvl;
+	randint = ((Enemy.maxeHP + Enemy.estr + Enemy.edef + Enemy.eitl + Enemy.espd) * Enemy.elvl) / Charac.difficultyD;
 	cout << "You earned " << randint << " experience!" << endl;
 	Charac.exp += randint;
 	while (Charac.exp > (int)((Charac.lvl * 50 * Charac.difficultyD)) * Charac.expmultiplier) {
@@ -893,7 +862,8 @@ void deathcheck() {
 	}
 }
 
-void battle() {
+
+void playerTurn() {
 	int acchit;
 	int randamage;
 	int randint;
@@ -905,267 +875,28 @@ void battle() {
 		cout << "HP: " << Charac.hp << "      Enemy HP: " << Enemy.ehp << "\nMP: " << Charac.mp << "      Enemy MP: " << Enemy.emp << endl;
 		cout << "\n1) Attack\n2) Cast\n3) Inventory\n4) Run" << endl;
 		cin >> input;
-		switch (input) {
-		case 1:
-			cout << "Which part do you want to target?" << endl;
-			cout << "\n1) Head - \nAccuracy: Low - Damage Multiplier: " << Acc.headdamagex << "x\nCurrent HP: " << Enemy.eheadhp << endl;
-			cout << "\n2) Chest - \nAccuracy: High - Damage Multiplier: " << Acc.chestdamagex << "x\nCurrent HP: " << Enemy.echesthp << endl;
-			cout << "\n3) Right Arm - \nAccuracy: Medium - Damage Multiplier: " << Acc.rightarmdamagex << "x\nCurrent: HP: " << Enemy.erightarmhp << endl;
-			cout << "\n4) Left Arm - \nAccuracy: Medium - Damage Multiplier: " << Acc.leftarmdamagex << "x\nCurrent HP: " << Enemy.eleftarmhp << endl;
-			cout << "\n5) Right Leg - \nAccuracy: Medium - Damage Multiplier: " << Acc.rightlegdamagex << "x\nCurrent HP: " << Enemy.erightleghp << endl;
-			cout << "\n6) Left Leg - \nAccuracy: Medium - Damage Multiplier: " << Acc.leftlegdamagex << "x\nCurrent HP: " << Enemy.eleftleghp << endl;
-			cin >> input;
-			switch (input) {
-			case 1:
-				acchit = rand() % 200;
-				if (acchit > Charac.equipped->getAccuracy()) {
-					cout << "You miss..." << endl;
-					enemyturn();
-				}
-				else if (acchit < Charac.equipped->getAccuracy()) {
-					randint = rand() % 100;
-					if (randint < Charac.crt + Charac.equipped->getCrit()) {
-						randamage = rand() % Charac.equipped->getDamage() + Charac.str * Acc.headdamagex + Charac.leftarmhp + Charac.rightarmhp * 2;
-						cout << "You get a critical hit! Dealing " << randamage << " extra damage! \nAlso dealing " << bodydamage << "body damage." << endl;
-						Enemy.ehp = Enemy.ehp - randamage;
-						Enemy.eheadhp = Enemy.eheadhp - bodydamage;
-						enemyturn();
-					}
-					else if (randint > Charac.crt + Charac.equipped->getCrit()) {
-						randamage = rand() % Charac.equipped->getDamage() + Charac.str * Acc.headdamagex + Charac.leftarmhp + Charac.rightarmhp;
-						cout << "You hit the enemy, dealing " << randamage << " damage to the enemy,\nand dealing " << bodydamage << " body part damage" << endl;
-						Enemy.ehp = Enemy.ehp - randamage;
-						Enemy.eheadhp = Enemy.eheadhp - bodydamage;
-						enemyturn();
-					}
-				}
-				break;
-			case 2:
-				acchit = rand() % 90;
-				if (acchit > Charac.equipped->getAccuracy()) {
-					cout << "You miss..." << endl;
-					enemyturn();
-				}
-				else if (acchit < Charac.equipped->getAccuracy()) {
-					randint = rand() % 100;
-					if (randint < Charac.crt + Charac.equipped->getCrit()) {
-						randamage = rand() % Charac.equipped->getDamage() + Charac.str * Acc.chestdamagex + Charac.leftarmhp + Charac.rightarmhp * 2;
-						cout << "You get a critical hit! Dealing " << randamage << " extra damage! \nAlso dealing " << bodydamage << "body damage." << endl;
-						Enemy.ehp = Enemy.ehp - randamage;
-						Enemy.echesthp = Enemy.echesthp - bodydamage;
-						enemyturn();
-					}
-					else if (randint > Charac.crt + Charac.equipped->getCrit()) {
-						randamage = rand() % Charac.equipped->getDamage() + Charac.str * Acc.chestdamagex;
-						cout << "You hit the enemy, dealing " << randamage << " damage to the enemy,\nand dealing " << bodydamage << " body part damage" << endl;
-						Enemy.ehp = Enemy.ehp - randamage;
-						Enemy.echesthp = Enemy.echesthp - bodydamage;
-						enemyturn();
-					}
-				}
-				break;
-			case 3:
-				acchit = rand() % 100;
-				if (acchit > Charac.equipped->getAccuracy()) {
-					cout << "You miss..." << endl;
-					enemyturn();
-				}
-				else if (randint > Charac.crt + Charac.equipped->getCrit()) {
-					randamage = rand() % Charac.equipped->getDamage() + Charac.str * Acc.rightarmdamagex + Charac.leftarmhp + Charac.rightarmhp * 2;
-					cout << "You get a critical hit! Dealing " << randamage << " damage to the enemy,\nand dealing " << bodydamage << " body part damage" << endl;
-					Enemy.ehp = Enemy.ehp - randamage;
-					Enemy.erightarmhp = Enemy.erightarmhp - bodydamage;
-					enemyturn();
-				}
-				else if (acchit < Charac.equipped->getAccuracy()) {
-					randamage = rand() % Charac.equipped->getDamage() + Charac.str * Acc.rightarmdamagex + Charac.leftarmhp + Charac.rightarmhp;
-					cout << "You hit the enemy, dealing " << randamage << " damage to the enemy,\nand dealing " << bodydamage << " body part damage" << endl;
-					Enemy.ehp = Enemy.ehp - randamage;
-					Enemy.erightarmhp = Enemy.erightarmhp - bodydamage;
-					enemyturn();
-				}
-
-				break;
-			case 4:
-				acchit = rand() % 100;
-				if (acchit > Charac.equipped->getAccuracy()) {
-					cout << "You miss..." << endl;
-					enemyturn();
-				}
-				else if (randint > Charac.crt + Charac.equipped->getCrit()) {
-					randamage = rand() % Charac.equipped->getDamage() + Charac.str * Acc.chestdamagex + Charac.leftarmhp + Charac.rightarmhp * 2;
-					cout << "You get a critical hit! Dealing " << randamage << " damage to the enemy,\nand dealing " << bodydamage << " body part damage" << endl;
-					Enemy.ehp = Enemy.ehp - randamage;
-					Enemy.eleftarmhp = Enemy.eleftarmhp - bodydamage;
-					enemyturn();
-				}
-				else if (acchit < Charac.equipped->getAccuracy()) {
-					randamage = rand() % Charac.equipped->getDamage() + Charac.str * Acc.leftarmdamagex;
-					cout << "You hit the enemy, dealing " << randamage << " damage to the enemy,\nand dealing " << bodydamage << " body part damage" << endl;
-					Enemy.ehp = Enemy.ehp - randamage;
-					Enemy.eleftarmhp = Enemy.eleftarmhp - bodydamage;
-					enemyturn();
-				}
-				break;
-			case 5:
-				acchit = rand() % 100;
-				if (acchit > Charac.equipped->getAccuracy()) {
-					cout << "You miss..." << endl;
-					enemyturn();
-				}
-				else if (randint > Charac.crt + Charac.equipped->getCrit()) {
-					randamage = rand() % Charac.equipped->getDamage() + Charac.str * Acc.rightlegdamagex + Charac.leftarmhp + Charac.rightarmhp * 2;
-					cout << "You get a critical hit! Dealing " << randamage << " damage to the enemy,\nand dealing " << bodydamage << " body part damage" << endl;
-					Enemy.ehp = Enemy.ehp - randamage;
-					Enemy.eleftarmhp = Enemy.erightleghp - bodydamage;
-					enemyturn();
-				}
-				else if (acchit < Charac.equipped->getAccuracy()) {
-					randamage = rand() % Charac.equipped->getDamage() + Charac.str * Acc.rightlegdamagex;
-					cout << "You hit the enemy, dealing " << randamage << " damage to the enemy,\nand dealing " << bodydamage << " body part damage" << endl;
-					Enemy.ehp = Enemy.ehp - randamage;
-					Enemy.erightleghp = Enemy.erightleghp - bodydamage;
-					enemyturn();
-				}
-				break;
-			case 6:
-				acchit = rand() % 100;
-				if (acchit > Charac.equipped->getAccuracy()) {
-					cout << "You miss..." << endl;
-					enemyturn();
-				}
-				else if (randint > Charac.crt + Charac.equipped->getCrit()) {
-					randamage = rand() % Charac.equipped->getDamage() + Charac.str * Acc.leftlegdamagex + Charac.leftarmhp + Charac.rightarmhp * 2;
-					cout << "You get a critical hit! Dealing " << randamage << " damage to the enemy,\nand dealing " << bodydamage << " body part damage" << endl;
-					Enemy.ehp = Enemy.ehp - randamage;
-					Enemy.eleftleghp = Enemy.eleftleghp - bodydamage;
-					enemyturn();
-				}
-				else if (acchit < Charac.equipped->getAccuracy()) {
-					randamage = rand() % Charac.equipped->getDamage() + Charac.str * Acc.leftlegdamagex;
-					cout << "You hit the enemy, dealing " << randamage << " damage to the enemy,\nand dealing " << bodydamage << " body part damage" << endl;
-					Enemy.ehp = Enemy.ehp - randamage;
-					Enemy.eleftleghp = Enemy.eleftleghp - bodydamage;
-					enemyturn();
-				}
-				break;
-			}
-			break;
-		case 2:
-			break;
-		case 3:
-			inventory();
-			break;
-		case 4:
-			break;
-		}
-
-	}
+}
 }
 
-void enemyturn() {
+void enemyTurn() {
 	int acchit;
 	int randamage;
 	int randint;
 	randint = rand() % 50;
-	if (randint < Charac.spd) {
-		randamage = rand() % Charac.equipped->getDamage() + Charac.str;
-		cout << "You hit an extra time because of your speed, dealing " << randamage << " damage." << endl;
-		Enemy.ehp -= randamage;
-	}
-	deathcheck();
-	wait_enter();
-	randint = rand() % 2;
-	if (randint <= 1) {
-		if (Enemy.ehp > Enemy.ehp / 2) {
-			acchit = rand() % 100;
-			if (acchit < Enemy.ecrt) {
-				randint = rand() % (Enemy.estr * Enemy.elvl) * (Enemy.erightarmhp + Enemy.eleftarmhp) * 2;
-				cout << "The enemy gets a critical hit! Dealing " << randint << " damage." << endl;
-				Charac.hp -= randint;
-			}
-			else if (acchit > Enemy.ecrt) {
-				randint = rand() % (Enemy.estr * Enemy.elvl) * (Enemy.erightarmhp + Enemy.eleftarmhp);
-				cout << "The enemy attacks! Dealing " << randint << " damage!" << endl;
-				Charac.hp -= randint;
-			}
-		}
-		else if (Enemy.ehp < Enemy.ehp / 2) {
-			randint = rand() % 2;
-			if (randint <= 1) {
-				if (Enemy.emp < 10) {
-					acchit = rand() % 100;
-					if (acchit < Enemy.ecrt) {
-						randint = rand() % (Enemy.estr * Enemy.elvl) * (Enemy.erightarmhp + Enemy.eleftarmhp) * 2;
-						cout << "The enemy gets a critical hit! Dealing " << randint << " damage." << endl;
-						Charac.hp -= randint;
-					}
-					else if (acchit > Enemy.ecrt) {
-						randint = rand() % (Enemy.estr * Enemy.elvl) * (Enemy.erightarmhp + Enemy.eleftarmhp);
-						cout << "The enemy attacks! Dealing " << randint << " damage!" << endl;
-						Charac.hp -= randint;
-					}
-				}
-				else if (Enemy.emp >= 10) {
-					randint = rand() % (Enemy.eitl * Enemy.elvl) + (Enemy.eheadhp);
-					cout << "The enemy heals back " << randint << " hp." << endl;
-					Enemy.ehp += randint;
-					Enemy.emp -= 10;
-				}
-			}
-			else if (randint == 2) {
-				acchit = rand() % 100;
-				if (acchit < Enemy.ecrt) {
-					randint = rand() % (Enemy.estr * Enemy.elvl) * (Enemy.erightarmhp + Enemy.eleftarmhp) * 2;
-					cout << "The enemy gets a critical hit! Dealing " << randint << " damage." << endl;
-					Charac.hp -= randint;
-				}
-				else if (acchit > Enemy.ecrt) {
-					randint = rand() % (Enemy.estr * Enemy.elvl) * (Enemy.erightarmhp + Enemy.eleftarmhp);
-					cout << "The enemy attacks! Dealing " << randint << " damage!" << endl;
-					Charac.hp -= randint;
-				}
-			}
-		}
-	}
-	else if (randint == 2) {
-		randint = rand() % 2;
-		if (randint == 1) {
-			if (Enemy.emp >= 10) {
-				randint = rand() % (Enemy.eitl * Enemy.elvl) + (Enemy.eheadhp);
-				cout << "The enemy casts fireball! Dealing " << randint << " damage!" << endl;
-				Charac.hp -= randint;
-				Enemy.emp -= 10;
-			}
-			else if (Enemy.emp >= 20) {
-				randint = rand() % (Enemy.eitl * Enemy.elvl) + (Enemy.eheadhp) * 2;
-				cout << "The enemy casts lightning! Dealing " << randint << " damage!" << endl;
-				Charac.hp -= randint;
-				Enemy.emp -= 20;
-			}
-			else if (Enemy.emp >= 35) {
-				randint = rand() % (Enemy.eitl * Enemy.elvl) + (Enemy.eheadhp) * 4;
-				cout << "The enemy casts Earthquake! Dealing " << randint << " damage!" << endl;
-				Charac.hp -= randint;
-				Enemy.emp -= 35;
-			}
-		}
-		else if (randint == 2) {
-			acchit = rand() % 100;
-			if (acchit < Enemy.ecrt) {
-				randint = rand() % (Enemy.estr * Enemy.elvl) * (Enemy.erightarmhp + Enemy.eleftarmhp) * 2;
-				cout << "The enemy gets a critical hit! Dealing " << randint << " damage." << endl;
-				Charac.hp -= randint;
-			}
-			else if (acchit > Enemy.ecrt) {
-				randint = rand() % (Enemy.estr * Enemy.elvl) * (Enemy.erightarmhp + Enemy.eleftarmhp);
-				cout << "The enemy attacks! Dealing " << randint << " damage!" << endl;
-				Charac.hp -= randint;
-			}
-		}
-	}
-	wait_enter();
+
 }
+
+void decideTurn() {
+    unsigned int turnSpeed = Charac.spd + (rand() % 5 + 1);
+    // Get enemy turn speed.
+    unsigned int enemyTurnSpeed = Enemy.espd + (rand() % 5 + 1);
+     if(turnSpeed > enemyTurnSpeed) {
+        playerTurn();
+    } else {
+        enemyTurn();
+    }
+}
+
 
 void explore() {
 	Enemygen();
@@ -1177,7 +908,7 @@ void explore() {
 	cin >> input;
 	switch (input) {
 	case 1:
-		battle();
+		decideTurn();
 		break;
 	case 2:
 		break;
@@ -1729,7 +1460,9 @@ void blackmarket() {
 			ClearScreen();
 			cout << "-*- Mike's Friendly Store -*-" << endl;
 			cout << "A very disgusting looking teen at the counter greets you as you walk in\n'Welcome to the store. SIR.' He says, with a very punchable face." << endl;
-			cout << "\n1) Normal Health Potion - " << ConsumableTable.generate("Normal Health Potion").getBuyPrice() << " Dust"<< endl;
+			cout << "\n1) Normal Health Potion - " << ConsumableTable.generate("Normal Health Potion").getBuyPrice() << " Dust\n2) Greater Health Potion - " << ConsumableTable.generate("Greater Health Potion").getBuyPrice() << " Dust\n3) Super Health Potion - " << ConsumableTable.generate("Super Health Potion").getBuyPrice() << " Dust"<< endl;
+			cout << "4) Full Health Potion - " << ConsumableTable.generate("Full Health Potion").getBuyPrice() << " Dust\n\n5) Normal Mana Potion - " << ConsumableTable.generate("Normal Mana Potion").getBuyPrice() << " Dust\n6) Greater Mana Potion - " << ConsumableTable.generate("Greater Mana Potion").getBuyPrice() << " Dust" << endl;
+			cout << "6) Super Mana Potion - " << ConsumableTable.generate("Super Mana Potion").getBuyPrice() << " Dust\n7) Full Mana Potion - " << ConsumableTable.generate("Full Mana Potion").getBuyPrice() << " Dust" << endl;
 			cin >> input2;
 			switch (input2) {
 			case 1:
@@ -1745,6 +1478,22 @@ void blackmarket() {
 					Charac.dust -= input2 * ConsumableTable.generate("Normal Health Potion").getBuyPrice();
 					for (std::size_t i = 0; i < input2; ++i)
 						Charac.inventory.addItem(ConsumableTable.generate("Normal Health Potion"));
+					wait_enter();
+				}
+				break;
+				case 2:
+				cout << "How many would you like to buy? (" << ConsumableTable.generate("Greater Health Potion").getBuyPrice() << " Each)" << endl;
+				cin >> input2;
+				if (input2 * ConsumableTable.generate("Greater Health Potion").getBuyPrice() > Charac.dust) {
+					cout << "You do not have enough dust!" << endl;
+					wait_enter();
+					home();
+				}
+				else if (input2 * ConsumableTable.generate("Greater Health Potion").getBuyPrice() <= Charac.dust) {
+					cout << "You bought " << input2 << " Greater Health Potions for " << input2 * ConsumableTable.generate("Greater Health Potion").getBuyPrice() << " dust" << endl;
+					Charac.dust -= input2 * ConsumableTable.generate("Greater Health Potion").getBuyPrice();
+					for (std::size_t i = 0; i < input2; ++i)
+						Charac.inventory.addItem(ConsumableTable.generate("Greater Health Potion"));
 					wait_enter();
 				}
 				break;
